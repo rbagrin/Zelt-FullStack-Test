@@ -2,6 +2,13 @@ import React, { useState, useEffect } from "react";
 import { Box, Typography } from "@mui/material";
 import axios from "axios";
 
+import ReactDOM from "react-dom/client";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Login from "./Login";
+import Superheroes from "./Superheroes";
+import Superhero from "./Superhero";
+import NewSuperhero from "./NewSuperhero";
+
 function App() {
   const [message, setMessage] = useState("");
   const [color, setColor] = useState("blue");
@@ -20,11 +27,22 @@ function App() {
   }, []);
 
   return (
-    <Box sx={{ mt: 10 }}>
-      <Typography variant="h4" color={color} align="center">
-        {message}
-      </Typography>
-    </Box>
+    // <Box sx={{ mt: 10 }}>
+    //   <Typography variant="h4" color={color} align="center">
+    //     {message}
+    //   </Typography>
+    // </Box>
+
+    <BrowserRouter>
+      <Routes>
+        <Route path="/">
+          <Route path="/login" element={<Login />}/>
+          <Route path="/superheroes" element={<Superheroes />}/>
+          <Route path="/superheroes/:id" element={<Superhero />}/>
+          <Route path="/addsuperhero" element={<NewSuperhero />}/>
+        </Route>
+      </Routes>
+    </BrowserRouter>
   );
 }
 
