@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Box, Button, Card, CardActions, CardContent, Grid, List, ListItem, ListItemButton, ListItemIcon, ListItemText, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TextField, Typography } from "@mui/material";
 import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
+import ImageUploading, { ImageListType } from "react-images-uploading";
 
 interface Hero {
   id: number;
@@ -17,6 +18,17 @@ function Superhero() {
 
     const [superhero, setSuperhero] = useState<Hero>(); 
     const navigate = useNavigate();
+    const [images, setImages] = React.useState([]);
+    const maxNumber = 69;
+
+    const onChange = (
+      imageList: ImageListType,
+      addUpdateIndex: number[] | undefined
+    ) => {
+      // data for submit
+      console.log(imageList, addUpdateIndex);
+      setImages(imageList as never[]);
+    };
 
     useEffect(() => {
       (async () => {
@@ -46,7 +58,48 @@ function Superhero() {
             </Typography>
           </CardContent>
           <CardActions>
-            <Button size="small" onClick={buttonHandler}>Delete Superhero</Button>
+            <Button sx={{ p: 2, m:5 }} size="small" variant="contained" onClick={buttonHandler}>Delete Superhero</Button>
+
+            <ImageUploading
+              multiple
+              value={images}
+              onChange={onChange}
+              maxNumber={maxNumber}
+            >
+              {({
+                imageList,
+                onImageUpload,
+                onImageRemoveAll,
+                onImageUpdate,
+                onImageRemove,
+                isDragging,
+                dragProps
+              }) => (
+                // write your building UI
+                <div className="upload__image-wrapper">
+                  <Button
+                    sx={{ p: 2, m:5 }} 
+                    size="small" 
+                    variant="contained" 
+                    style={isDragging ? { color: "red" } : undefined}
+                    onClick={onImageUpload}
+                    {...dragProps}
+                  >
+                    Click or Drop here
+                  </Button>
+                  &nbsp;
+                  {imageList.map((image, index) => (
+                    <div key={index} className="image-item">
+                      <img src={image.dataURL} alt="" width="100" />
+                      <div className="image-item__btn-wrapper">
+                        <Button sx={{ p: 2, m:5 }} size="small" variant="contained" onClick={() => onImageUpdate(index)}>Update</Button>
+                        <Button sx={{ p: 2, m:5 }} size="small" variant="contained" onClick={() => onImageRemove(index)}>Remove</Button>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </ImageUploading>
           </CardActions>
         </Card>
       </Box>
