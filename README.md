@@ -51,10 +51,10 @@ Congratulations, you made it to the next step at Zelt's recruiting process! At t
 * can be used only if authenticated
 
 ## Requirements
-- [ ] pages required: /login, /superheroes (the list of heroes), /superheroes/:id - superhero details page
-- [ ] home page should list all the superheroes (can use a list, a table, cards or whatever you think it would look nice and would do the job)
+- [X] pages required: /login, /superheroes (the list of heroes), /superheroes/:id - superhero details page
+- [X] home page should list all the superheroes (can use a list, a table, cards or whatever you think it would look nice and would do the job)
 - [ ] on the hompage you should be able to add a new superhero
-- [ ] on the superhero page you should be able to delete that superhero
+- [X] on the superhero page you should be able to delete that superhero
 - [ ] on each superhero page add some images of that superhero (no need to save that image in the backend, can be a static public file)
 - [ ] if not logged in - only the login page
 - [ ] your code should be tested
