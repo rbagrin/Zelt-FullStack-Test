@@ -1,6 +1,10 @@
 import {
+  Body,
   Controller,
+  Delete,
   Get,
+  Param,
+  Post,
   Req,
   UnauthorizedException,
 } from '@nestjs/common';
@@ -8,6 +12,7 @@ import { HeroService } from './hero.service';
 import { Hero } from './hero.entity';
 import { Request } from 'express';
 import { JwtService } from '@nestjs/jwt';
+import { CreateHero } from './hero.interface';
 
 @Controller('/heroes')
 export class HeroController {
@@ -33,5 +38,35 @@ export class HeroController {
     await this.checkLoggedIn(request);
 
     return this.heroService.findAll();
+  }
+
+  @Get('/:id')
+  async getHero(
+    @Req() request: Request,
+    @Param('id') id: number,
+  ): Promise<Hero> {
+    await this.checkLoggedIn(request);
+
+    return this.heroService.findById(id);
+  }
+
+  @Post('/hero')
+  async addHero(
+    @Req() request: Request,
+    @Body() hero: CreateHero,
+  ): Promise<Hero> {
+    await this.checkLoggedIn(request);
+
+    return this.heroService.create(hero);
+  }
+
+  @Delete('/:id')
+  async deleteUser(
+    @Req() request: Request,
+    @Param('id') id: number,
+  ): Promise<void> {
+    await this.checkLoggedIn(request);
+
+    await this.heroService.deleteById(id);
   }
 }
