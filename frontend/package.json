@@ -49,5 +49,8 @@
   "proxy": "http://localhost:8000",
   "devDependencies": {
     "react-router-dom": "^6.3.0"
+  },
+  "optionalDependencies": {
+    "fsevents": "^2.3.2"
   }
 }

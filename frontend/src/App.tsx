@@ -35,12 +35,10 @@ function App() {
 
     <BrowserRouter>
       <Routes>
-        <Route path="/">
-          <Route path="/login" element={<Login />}/>
-          <Route path="/superheroes" element={<Superheroes />}/>
-          <Route path="/superheroes/:id" element={<Superhero />}/>
-          <Route path="/addsuperhero" element={<NewSuperhero />}/>
-        </Route>
+        <Route path="/login" element={<Login />}/>
+        <Route path="/superheroes" element={<Superheroes />}/>
+        <Route path="/superheroes/:id" element={<Superhero />}/>
+        <Route path="/addsuperhero" element={<NewSuperhero />}/>
       </Routes>
     </BrowserRouter>
   );
