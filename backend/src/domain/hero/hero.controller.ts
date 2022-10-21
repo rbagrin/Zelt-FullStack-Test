@@ -32,6 +32,12 @@ export class HeroController {
     }
   }
 
+  @Get('/:id')
+  async getHeroById(@Req() request: Request, @Param('id') id: number): Promise<Hero> {
+    await this.checkLoggedIn(request);
+
+    return this.heroService.findById(id)
+  }
 
   @Get('/')
   async getAllHeroes(@Req() request: Request): Promise<Hero[]> {
@@ -40,14 +46,7 @@ export class HeroController {
     return this.heroService.findAll();
   }
 
-  @Get('/heroes/:id')
-  async getHeroById(@Req() request: Request, @Param('id') id: number): Promise<Hero> {
-    await this.checkLoggedIn(request);
-
-    return this.heroService.findById(id)
-  }
-
-  @Post('/heroes')
+  @Post('/')
   async addHero(@Req() request: Request, @Body() hero: CreateHero): Promise<Hero> {
     await this.checkLoggedIn(request);
 

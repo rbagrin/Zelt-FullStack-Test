@@ -8,6 +8,8 @@ import {
   RouterProvider,
 } from 'react-router-dom';
 import LoginPage from './pages/Login';
+import SuperheroesPage from './pages/Superheroes';
+import SuperheroPage from './pages/Superhero';
 
 const router = createBrowserRouter([
   {
@@ -17,6 +19,14 @@ const router = createBrowserRouter([
       {
         path: '/login',
         element: <LoginPage />
+      },
+      {
+        path: '/superheroes',
+        element: <SuperheroesPage />
+      },
+      {
+        path: '/superheroes/:id',
+        element: <SuperheroPage />
       }
     ]
   }

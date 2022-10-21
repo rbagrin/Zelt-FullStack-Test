@@ -4,7 +4,7 @@ import { Outlet } from 'react-router-dom';
 
 function App() {
   return (
-    <Container maxWidth="xl" sx={{ mt: '50px' }}>
+    <Container maxWidth="xl" sx={{ mt: '50px', mb: '50px' }}>
       <Outlet />
     </Container>
   );
