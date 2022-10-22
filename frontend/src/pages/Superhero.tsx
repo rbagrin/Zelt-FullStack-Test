@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Grid } from '@mui/material';
+import { Grid, Link } from '@mui/material';
 import { getHero } from '../api/heroes';
 import { Hero } from '../api/heroes';
 import { useParams } from 'react-router-dom';
@@ -27,6 +27,9 @@ const SuperheroPage = () => {
           <SuperheroCard hero={hero} context="single" />
         </Grid>
       )}
+      <Grid item>
+        <Link href="/superheroes" sx={{ color: 'black' }}>{`< Back to your collection`}</Link>
+      </Grid>
     </Grid>
   )
 }
