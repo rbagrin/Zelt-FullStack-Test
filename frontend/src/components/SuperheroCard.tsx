@@ -24,7 +24,7 @@ const SuperheroCard = ({ hero, context }: Props) => {
     <Card sx={{ maxWidth: '400px' }}>
       <CardMedia
         component="img"
-        image={`/images/${hero.id}.jpeg`}
+        image={`/images/${hero.id <= 5 ? hero.id : 'random'}.jpeg`}
         alt={`${hero.name}-image`}
         height="200"
       />
@@ -37,7 +37,7 @@ const SuperheroCard = ({ hero, context }: Props) => {
         </Typography>
         <Divider sx={{ marginBottom: '20px' }} />
         <Typography variant="body2" component="div">
-          {context === 'single' && hero.description}
+          {context === 'single' && (hero.description || hero.shortDescription)}
           {context === 'list' && hero.shortDescription}
         </Typography>
       </CardContent>
@@ -46,7 +46,7 @@ const SuperheroCard = ({ hero, context }: Props) => {
           fullWidth
           variant="contained"
           onClick={context === 'single' ? handleDelete : handleView}
-          color={context === 'single' ? 'error' : 'info'}
+          sx={{ backgroundColor: context === 'single' ? 'rgb(194, 63, 56)' : 'black' }}
         >
           {context === 'single' && 'Delete'}
           {context === 'list' && 'View'}
