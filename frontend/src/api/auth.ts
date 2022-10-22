@@ -7,6 +7,10 @@ export async function login(name: string, password: string): Promise<void> {
   });
 }
 
+export async function logout() {
+  return await axios.post('/logout')
+}
+
 export async function register(name: string, password: string): Promise<void> {
   await axios.post('/register', {
     name,

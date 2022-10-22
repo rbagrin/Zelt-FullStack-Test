@@ -4,18 +4,22 @@ import { getHeroes } from '../api/heroes';
 import { Hero } from '../api/heroes';
 import SuperheroCard from '../components/SuperheroCard';
 import CreateHeroDialog from '../components/CreateHeroDialog';
+import { useNavigate } from 'react-router-dom';
 
 const SuperheroesPage = () => {
   const [heroes, setHeroes] = useState<Hero[]>([])
   const [dialogOpen, setDialogOpen] = useState<boolean>(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     (async () => {
       try {
         const response = await getHeroes();
         setHeroes(response);
-      } catch {
-
+      } catch (e: any) {
+        if (e.response.status === 401) {
+          navigate('/login')
+        }
       }
     })();
   }, []);

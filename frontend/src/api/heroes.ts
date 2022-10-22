@@ -9,15 +9,21 @@ export interface Hero {
 }
 
 export async function getHeroes(): Promise<Hero[]> {
-  const response = await axios.get('/heroes');
-
-  return response.data;
+  try {
+    const response = await axios.get(`/heroes`);
+    return response.data;
+  } catch (e) {
+    throw e;
+  }
 }
 
 export async function getHero(id: number): Promise<Hero> {
-  const response = await axios.get(`/heroes/${id}`);
-
-  return response.data;
+  try {
+    const response = await axios.get(`/heroes/${id}`);
+    return response.data;
+  } catch (e) {
+    throw e;
+  }
 }
 
 export async function createHero({ name, shortDescription, description, power }: Hero): Promise<number> {
