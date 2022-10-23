@@ -1,30 +1,45 @@
-import React, { useState, useEffect } from "react";
-import { Box, Typography } from "@mui/material";
-import axios from "axios";
+import React, { useEffect, useState } from "react";
+import { AppBar, Container, Toolbar, Typography, Button } from "@mui/material";
+import { Outlet, useNavigate } from 'react-router-dom';
+import { checkLoginStatus, logout } from './api/auth';
 
 function App() {
-  const [message, setMessage] = useState("");
-  const [color, setColor] = useState("blue");
+  const navigate = useNavigate();
+  const [loggedIn, setLoggedIn] = useState<boolean>(false);
+
+  const handleLogout = async () => {
+    await logout();
+    setLoggedIn(false);
+    navigate('/login')
+  }
+
+  useEffect(() => {
+    navigate('/login')
+  }, []);
 
   useEffect(() => {
     (async () => {
-      try {
-        const message = (await axios.get("/hello-world")).data;
-        setMessage(message);
-        setColor("blue");
-      } catch {
-        setMessage("Something went wrong!");
-        setColor("red");
-      }
-    })();
-  }, []);
+      const response = await checkLoginStatus();
+      setLoggedIn(response);
+    })()
+  });
 
   return (
-    <Box sx={{ mt: 10 }}>
-      <Typography variant="h4" color={color} align="center">
-        {message}
-      </Typography>
-    </Box>
+    <>
+      <AppBar position="sticky" sx={{ backgroundColor: 'rgb(238, 232, 227)', color: 'black' }}>
+        <Toolbar>
+          <Typography variant="h5" component="div" sx={{ flexGrow: 1 }}>
+            Zelt Superheroes
+          </Typography>
+          {loggedIn && (
+            <Button color="inherit" onClick={handleLogout}>Logout</Button>
+          )}
+        </Toolbar>
+      </AppBar>
+      <Container maxWidth="xl" sx={{ mt: '50px', mb: '50px' }}>
+        <Outlet />
+      </Container>
+    </>
   );
 }
 
