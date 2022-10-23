@@ -62,7 +62,6 @@ const TabPanel = (props: TabPanelProps) => {
             onChange={(e) => handleUsernameChange(e)}
             error={errorState.username}
             value={username}
-            inputProps={{ id: `${index === 0 ? 'login' : 'register'}-username` }}
           />
         </Grid>
         <Grid item>
@@ -75,7 +74,6 @@ const TabPanel = (props: TabPanelProps) => {
             onChange={(e) => handlePasswordChange(e)}
             error={errorState.password}
             value={password}
-            inputProps={{ id: `${index === 0 ? 'login' : 'register'}-password` }}
           />
         </Grid>
         {index === 1 && (
@@ -89,7 +87,6 @@ const TabPanel = (props: TabPanelProps) => {
               onChange={(e) => handleConfirmPasswordChange(e)}
               error={errorState.confirmPassword}
               value={confirmPassword}
-              inputProps={{ id: `register-confirm-password` }}
             />
           </Grid>
         )}

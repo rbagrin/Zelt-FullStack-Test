@@ -31,8 +31,8 @@ test('renders the register tab', () => {
 })
 
 test('validates required fields', () => {
-    const { container } = render(<LoginPage />, { wrapper: BrowserRouter });
-    fireEvent.change(container.querySelector('#login-username'), { target: { value: 'Test' } });
+    render(<LoginPage />, { wrapper: BrowserRouter });
+    fireEvent.change(screen.getAllByLabelText('Username *')[0], { target: { value: 'Test' } });
   
     fireEvent.click(screen.getAllByText('Login')[1])
   
@@ -40,12 +40,13 @@ test('validates required fields', () => {
   })
 
 test('validates matching passwords on registration', () => {
-  const { container } = render(<LoginPage />, { wrapper: BrowserRouter });
-  fireEvent.click(screen.getByText('Register'))
+  render(<LoginPage />, { wrapper: BrowserRouter });
 
-  fireEvent.change(container.querySelector('#register-username'), { target: { value: 'Test' } });
-  fireEvent.change(container.querySelector('#register-password'), { target: { value: 'Test' } });
-  fireEvent.change(container.querySelector('#register-confirm-password'), { target: { value: 'Testing' } });
+  fireEvent.click(screen.getByText('Register'))
+  
+  fireEvent.change(screen.getAllByLabelText('Username *')[0], { target: { value: 'Test' } });
+  fireEvent.change(screen.getAllByLabelText('Password *')[0], { target: { value: 'Test' } });
+  fireEvent.change(screen.getByLabelText('Confirm Password *'), { target: { value: 'Testing' } });
   
   fireEvent.click(screen.getAllByText('Register')[1])
 
