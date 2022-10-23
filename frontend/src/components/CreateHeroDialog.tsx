@@ -120,7 +120,7 @@ const CreateHeroDialog = ({ open, setOpen }: Props) => {
           sx={{ mb: 5 }}
         />
         {(errorState.name || errorState.power || errorState.shortDescription) && (
-          <Alert sx={{ mb: 2 }} severity="error">Please fill in the required fields</Alert>
+          <Alert sx={{ mb: 2 }} severity="error">Please fill in the required fields.</Alert>
         )}
         <Button
           variant="contained"

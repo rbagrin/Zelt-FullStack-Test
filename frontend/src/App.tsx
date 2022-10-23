@@ -20,7 +20,7 @@ function App() {
   useEffect(() => {
     (async () => {
       const response = await checkLoginStatus();
-      setLoggedIn(response); 
+      setLoggedIn(response);
     })()
   });
 

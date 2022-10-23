@@ -62,6 +62,7 @@ const TabPanel = (props: TabPanelProps) => {
             onChange={(e) => handleUsernameChange(e)}
             error={errorState.username}
             value={username}
+            inputProps={{ id: `${index === 0 ? 'login' : 'register'}-username` }}
           />
         </Grid>
         <Grid item>
@@ -74,6 +75,7 @@ const TabPanel = (props: TabPanelProps) => {
             onChange={(e) => handlePasswordChange(e)}
             error={errorState.password}
             value={password}
+            inputProps={{ id: `${index === 0 ? 'login' : 'register'}-password` }}
           />
         </Grid>
         {index === 1 && (
@@ -87,6 +89,7 @@ const TabPanel = (props: TabPanelProps) => {
               onChange={(e) => handleConfirmPasswordChange(e)}
               error={errorState.confirmPassword}
               value={confirmPassword}
+              inputProps={{ id: `register-confirm-password` }}
             />
           </Grid>
         )}
@@ -256,6 +259,7 @@ const LoginPage = () => {
             variant="contained"
             color="success"
             onClick={tab === 0 ? handleLogin : handleRegister}
+            data-testid="submit-button"
           >
             {tab === 0 ? 'Login' : 'Register'}
           </Button>
@@ -277,7 +281,7 @@ const LoginPage = () => {
       )}
       {(errorState.username || errorState.password || errorState.confirmPassword) && (
         <Alert sx={{ mt: 2 }} severity="error">
-          {confirmPassword ? ' Please make sure that the passwords match.' : 'Please fill in the required fields.'}
+          {confirmPassword ? ' Please make sure that the passwords match.' : ' Please fill in the required fields.'}
         </Alert>
       )}
     </Grid>
