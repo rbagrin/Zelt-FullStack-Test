@@ -129,25 +129,27 @@ const LoginPage = () => {
   }
 
   const handleLogin = async () => {
-    setErrorState({
-      username: !username,
-      password: !password,
-      confirmPassword: false,
-      login: false,
-      register: false,
-    })
-
-    try {
-      await login(username, password);
-      setLoggedIn(true);
-    } catch {
+    if (!username || !password) {
       setErrorState({
         username: !username,
         password: !password,
         confirmPassword: false,
-        login: true,
-        register: false
+        login: false,
+        register: false,
       })
+    } else {
+      try {
+        await login(username, password);
+        setLoggedIn(true);
+      } catch {
+        setErrorState({
+          username: !username,
+          password: !password,
+          confirmPassword: false,
+          login: true,
+          register: false
+        })
+      }
     }
   }
 

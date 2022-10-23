@@ -2,7 +2,7 @@ import { fireEvent, render, screen } from '@testing-library/react';
 import CreateHeroDialog from '../components/CreateHeroDialog';
 import { BrowserRouter } from 'react-router-dom';
 
-test('renders the page', () => {
+test('renders the dialog', () => {
   render(<CreateHeroDialog open={true} setOpen={() => true} />, { wrapper: BrowserRouter });
 
   expect(screen.getByText('Add a superhero to your collection')).toBeInTheDocument();

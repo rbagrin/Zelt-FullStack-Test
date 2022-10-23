@@ -6,9 +6,9 @@ import { useNavigate, useParams } from 'react-router-dom';
 import SuperheroCard from '../components/SuperheroCard';
 
 const SuperheroPage = () => {
-  const [hero, setHero] = useState<Hero>()
+  const [hero, setHero] = useState<Hero | null>(null)
   const { id } = useParams();
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   useEffect(() => {
     (async () => {
